@@ -1,0 +1,82 @@
+spring:
+    datasource:
+        url: jdbc:mysql://localhost:3306/wcg?allowMultiQueries=true&useUnicode=true&characterEncoding=utf8&serverTimezone=Asia/Shanghai&useSSL=false&allowPublicKeyRetrieval=true
+        username: root
+        password: rootroot
+    druid:
+        max-wait: 30000
+        query-timeout: 10
+        validation-query: SELECT 1
+        use-global-data-source-stat: true
+        # 默认开启，当前已开启
+        stat:
+            log-slow-sql: true
+            slow-sql-millis: 1000
+        # 默认关闭，需手动开启，当前已开启
+        slf4j:
+            enabled: true
+            data-source-log-enabled: false
+            connection-log-enabled: false
+            statement-log-enabled: false
+            result-set-log-enabled: false
+        # 默认关闭，需手动开启，当前已开启
+        wall:
+            enabled: true
+            log-violation: true
+            throw-exception: false
+            config:
+                delete-where-none-check: true
+        # 默认关闭，需手动开启，当前已关闭
+        config:
+            enabled: false
+        # 默认关闭，需手动开启，当前已关闭
+        web-stat:
+            enabled: false
+        # 默认关闭，需手动开启，当前已关闭
+        aop-stat:
+            enabled: false
+        # 默认关闭，需手动开启，当前已关闭
+        stat-view-servlet:
+            enabled: false
+        transaction:
+            rollback-on-commit-failure: true
+        mvc:
+            servlet:
+                load-on-startup: 1
+        aop:
+            auto: true
+            proxy-target-class: true
+        http:
+            encoding:
+                enabled: true
+                force: true
+                charset: utf-8
+            converters:
+                preferred-json-mapper: jackson
+        jackson:
+            default-property-inclusion: non_null
+            time-zone: GMT+8
+            date-format: yyyy-MM-dd HH:mm:ss
+            serialization:
+                indent_output: true
+                write_null_map_values: true
+                write_dates_as_timestamps: false
+            deserialization:
+                fail_on_unknown_properties: false
+            parser:
+                allow_unquoted_control_chars: true
+                allow_single_quotes: true
+mybatis-plus:
+    # 如果是放在src/main/java目录下 classpath:/com/yourpackage/*/mapper/*Mapper.xml
+    # 如果是放在resource目录 classpath:/mapper/*.xml
+    mapper-locations: classpath:/mapper/*/*Mapper.xml
+    #实体扫描，多个package用逗号或者分号分隔
+    typeAliasesPackage: com.springboot.security.module.*.entity
+    configuration:
+        #配置返回数据库(column下划线命名&&返回java实体是驼峰命名)，自动匹配无需as（没开启这个，SQL需要写as： select user_id as userId）
+        map-underscore-to-camel-case: true
+        cache-enabled: false
+        log-prefix: dao.
+mybatis:
+    configuration:
+        log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
