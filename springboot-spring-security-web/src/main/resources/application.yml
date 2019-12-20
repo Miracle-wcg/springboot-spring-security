@@ -1,3 +1,4 @@
+
 spring:
     datasource:
         url: jdbc:mysql://localhost:3306/wcg?allowMultiQueries=true&useUnicode=true&characterEncoding=utf8&serverTimezone=Asia/Shanghai&useSSL=false&allowPublicKeyRetrieval=true
@@ -69,7 +70,7 @@ spring:
 mybatis-plus:
     # 如果是放在src/main/java目录下 classpath:/com/yourpackage/*/mapper/*Mapper.xml
     # 如果是放在resource目录 classpath:/mapper/*.xml
-    mapper-locations: classpath:/mapper/*/*Mapper.xml
+    mapper-locations: classpath:/com/springboot/security/module/*/mapper/xml/*Mapper.xml
     #实体扫描，多个package用逗号或者分号分隔
     typeAliasesPackage: com.springboot.security.module.*.entity
     configuration:

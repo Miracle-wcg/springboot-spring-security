@@ -24,9 +24,12 @@
         <orika.verison>1.10.0</orika.verison>
         <springfox.swagger.verison>2.9.2</springfox.swagger.verison>
         <swagger.verison>1.5.22</swagger.verison>
-        <springboot.security.verison>1.5.11.RELEASE</springboot.security.verison>
         <druid.verison>1.1.21</druid.verison>
         <commons-lang3.verison>3.8.1</commons-lang3.verison>
+
+        <spring-security-oauth2.verison>2.0.14.RELEASE</spring-security-oauth2.verison>
+        <spring-security-jwt.verison>1.0.11.RELEASE</spring-security-jwt.verison>
+        <jjwt.verison>0.9.1</jjwt.verison>
     </properties>
 
     <dependencyManagement>
@@ -87,6 +90,22 @@
                 <groupId>org.apache.commons</groupId>
                 <artifactId>commons-lang3</artifactId>
                 <version>${commons-lang3.verison}</version>
+            </dependency>
+            <!--spring-security jwt-->
+          <!--  <dependency>
+                <groupId>org.springframework.security.oauth</groupId>
+                <artifactId>spring-security-oauth2</artifactId>
+                <version>${spring-security-oauth2.verison}</version>
+            </dependency>-->
+            <dependency>
+                <groupId>org.springframework.security</groupId>
+                <artifactId>spring-security-jwt</artifactId>
+                <version>${spring-security-jwt.verison}</version>
+            </dependency>
+            <dependency>
+                <groupId>io.jsonwebtoken</groupId>
+                <artifactId>jjwt</artifactId>
+                <version>${jjwt.verison}</version>
             </dependency>
         </dependencies>
     </dependencyManagement>

@@ -1,12 +1,18 @@
 package com.springboot.security;
 
+import com.springboot.security.module.sys.entity.SysRole;
 import com.springboot.security.module.sys.entity.SysUser;
+import com.springboot.security.module.sys.entity.SysUserRole;
+import com.springboot.security.module.sys.service.SysRoleService;
+import com.springboot.security.module.sys.service.SysUserRoleService;
 import com.springboot.security.module.sys.service.SysUserService;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
+
+import java.util.List;
 
 /**
  * @Author: chengang.wu
@@ -16,13 +22,38 @@ import org.springframework.test.context.junit4.SpringRunner;
 @SpringBootTest
 public class SysUserServiceTest {
     @Autowired
-    private SysUserService sysUserService;
+    private SysUserService userService;
+    @Autowired
+    private SysRoleService roleService;
+    @Autowired
+    private SysUserRoleService userRoleService;
 
     @Test
-    public void save() {
+    public void saveSysUser() {
         SysUser user = new SysUser();
         user.setUsername("test");
         user.setPassword("123456");
-        sysUserService.save(user);
+        userService.save(user);
+    }
+
+    @Test
+    public void saveSysRole() {
+        SysRole role = new SysRole();
+        role.setRoleName("admin");
+        roleService.save(role);
+    }
+
+    @Test
+    public void saveSysUserRole() {
+        SysUserRole userRole = new SysUserRole();
+        userRole.setUserId("1");
+        userRole.setRoleId("1");
+        userRoleService.save(userRole);
+    }
+
+    @Test
+    public void selectAllRoleByUserId() {
+        List<String> list = userService.selectAllRoleByUserId(1);
+        System.out.println(111);
     }
 }
