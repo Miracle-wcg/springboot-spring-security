@@ -92,11 +92,11 @@
                 <version>${commons-lang3.verison}</version>
             </dependency>
             <!--spring-security jwt-->
-          <!--  <dependency>
-                <groupId>org.springframework.security.oauth</groupId>
-                <artifactId>spring-security-oauth2</artifactId>
-                <version>${spring-security-oauth2.verison}</version>
-            </dependency>-->
+            <!--  <dependency>
+                  <groupId>org.springframework.security.oauth</groupId>
+                  <artifactId>spring-security-oauth2</artifactId>
+                  <version>${spring-security-oauth2.verison}</version>
+              </dependency>-->
             <dependency>
                 <groupId>org.springframework.security</groupId>
                 <artifactId>spring-security-jwt</artifactId>
@@ -106,6 +106,13 @@
                 <groupId>io.jsonwebtoken</groupId>
                 <artifactId>jjwt</artifactId>
                 <version>${jjwt.verison}</version>
+            </dependency>
+
+            <!-- For Java 8 Date/Time Support -->
+            <dependency>
+                <groupId>com.fasterxml.jackson.datatype</groupId>
+                <artifactId>jackson-datatype-jsr310</artifactId>
+                <version>2.10.1</version>
             </dependency>
         </dependencies>
     </dependencyManagement>
