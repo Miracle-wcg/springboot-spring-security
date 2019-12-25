@@ -8,10 +8,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-/**
- * Created by Shuangyao
- * 16:34 2018/9/9
- */
 @Service("authenticationEntryPointImpl")
 public class AuthenticationEntryPointImpl implements AuthenticationEntryPoint {
     @Override
