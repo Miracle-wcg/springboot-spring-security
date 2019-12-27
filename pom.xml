@@ -30,6 +30,7 @@
         <spring-security-oauth2.verison>2.0.14.RELEASE</spring-security-oauth2.verison>
         <spring-security-jwt.verison>1.0.11.RELEASE</spring-security-jwt.verison>
         <jjwt.verison>0.9.1</jjwt.verison>
+        <java-jwt.version>3.4.0</java-jwt.version>
     </properties>
 
     <dependencyManagement>
@@ -106,6 +107,11 @@
                 <groupId>io.jsonwebtoken</groupId>
                 <artifactId>jjwt</artifactId>
                 <version>${jjwt.verison}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.auth0</groupId>
+                <artifactId>java-jwt</artifactId>
+                <version>${java-jwt.version}</version>
             </dependency>
 
             <!-- For Java 8 Date/Time Support -->

@@ -1,5 +1,7 @@
 package com.springboot.security.config.security;
 
+import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
+import com.springboot.security.module.sys.entity.SysUser;
 import com.springboot.security.module.sys.service.SysUserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -19,25 +21,22 @@ public class CustomUserDetailsService implements UserDetailsService {
 
     @Override
     @Transactional
-    public UserDetails loadUserByUsername(String usernameOrEmail)
+    public UserDetails loadUserByUsername(String username)
             throws UsernameNotFoundException {
-        // Let people login with either username or email
-//        User user = userService.findByUsernameOrEmail(usernameOrEmail, usernameOrEmail)
-//                .orElseThrow(() ->
-//                        new UsernameNotFoundException("User not found with username or email : " + usernameOrEmail)
-//                );
-//
-//        return UserPrincipal.create(user);
-        return null;
+        // Let people login with either username
+        SysUser user = userService.getOne(new LambdaQueryWrapper<SysUser>().eq(SysUser::getUsername, username));
+        if (user == null) {
+            throw new UsernameNotFoundException("User not found with username : " + username);
+        }
+        return UserPrincipal.create(user);
     }
 
     @Transactional
     public UserDetails loadUserById(Long id) {
-//        User user = userRepository.findById(id).orElseThrow(
-//                () -> new ResourceNotFoundException("User", "id", id)
-//        );
-//
-//        return UserPrincipal.create(user);
-        return null;
+        SysUser user = userService.getById(id);
+        if (user == null) {
+            throw new UsernameNotFoundException("User not found with id : " + id);
+        }
+        return UserPrincipal.create(user);
     }
 }
