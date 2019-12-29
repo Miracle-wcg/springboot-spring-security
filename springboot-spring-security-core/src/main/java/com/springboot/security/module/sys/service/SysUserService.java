@@ -14,4 +14,6 @@ public interface SysUserService extends IService<SysUser> {
     UserDetails getUserDetailsByUsername(String username);
 
     List<String> selectAllRoleByUserId(Integer userId);
+
+    SysUser getUserDetailByUsername(String username);
 }

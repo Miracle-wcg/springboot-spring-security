@@ -4,7 +4,7 @@ import com.baomidou.mybatisplus.annotation.TableField;
 import com.springboot.security.common.entity.BaseEntity;
 import lombok.Data;
 
-import java.util.Set;
+import java.util.List;
 
 /**
  * @Author: chengang.wu
@@ -16,5 +16,5 @@ public class SysUser extends BaseEntity {
     private String password;
     private String email;
     @TableField(exist = false)
-    private Set<SysRole> roles;
+    private List<SysRole> roles;
 }

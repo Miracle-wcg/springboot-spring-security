@@ -22,7 +22,7 @@ public class SwaggerConfiguration {
                 .groupName("default")
                 .apiInfo(new ApiInfoBuilder().title("Springboot Security API").version("1.0.0").build())
                 .select()
-                .apis(RequestHandlerSelectors.basePackage("com.springboot.security"))
+                .apis(RequestHandlerSelectors.basePackage("com.springboot.security.controller"))
                 .build()
                 .globalOperationParameters(globalOperationParameters());
     }

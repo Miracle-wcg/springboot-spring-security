@@ -1,5 +1,6 @@
 package com.springboot.security;
 
+import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.springboot.security.module.sys.entity.SysRole;
 import com.springboot.security.module.sys.entity.SysUser;
 import com.springboot.security.module.sys.entity.SysUserRole;
@@ -11,8 +12,6 @@ import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
-
-import java.util.List;
 
 /**
  * @Author: chengang.wu
@@ -53,7 +52,9 @@ public class SysUserServiceTest {
 
     @Test
     public void selectAllRoleByUserId() {
-        List<String> list = userService.selectAllRoleByUserId(1);
+//        List<String> list = userService.selectAllRoleByUserId(1);
+//        SysUser admin = userService.getOne(new LambdaQueryWrapper<SysUser>().eq(SysUser::getUsername, "admin"));
+        SysUser admin1 = userService.getUserDetailByUsername("admin");
         System.out.println(111);
     }
 }

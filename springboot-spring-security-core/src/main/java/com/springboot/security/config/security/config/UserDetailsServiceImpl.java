@@ -1,33 +1,40 @@
-package com.springboot.security.config.security;
+package com.springboot.security.config.security.config;
 
-import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.springboot.security.module.sys.entity.SysUser;
 import com.springboot.security.module.sys.service.SysUserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
-import org.springframework.stereotype.Service;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
+
 /**
- * @Author Miracle.wcg
- * @Date 2019-12-26 00:11
+ * @Description:获取用户权限的service
  */
-@Service
-public class CustomUserDetailsService implements UserDetailsService {
+@Component
+public class UserDetailsServiceImpl implements UserDetailsService {
     @Autowired
     private SysUserService userService;
+    @Autowired
+    private PasswordEncoder passwordEncoder;
 
+    /**
+     * @Description:加载用户信息&权限
+     * @param: username 用户名
+     * @Return: org.springframework.security.core.userdetails.UserDetails
+     */
     @Override
-    @Transactional
-    public UserDetails loadUserByUsername(String username)
-            throws UsernameNotFoundException {
-        // Let people login with either username
-        SysUser user = userService.getOne(new LambdaQueryWrapper<SysUser>().eq(SysUser::getUsername, username));
+    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+        SysUser user = userService.getUserDetailByUsername(username);
         if (user == null) {
             throw new UsernameNotFoundException("User not found with username : " + username);
         }
+//        BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
+//        user.setPassword(encoder.encode(user.getPassword()));
         return UserPrincipal.create(user);
     }
 

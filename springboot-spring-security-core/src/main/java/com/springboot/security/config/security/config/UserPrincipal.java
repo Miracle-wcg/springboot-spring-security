@@ -1,4 +1,4 @@
-package com.springboot.security.config.security;
+package com.springboot.security.config.security.config;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.springboot.security.module.sys.entity.SysUser;
@@ -14,13 +14,13 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 /**
- * @Author Miracle.wcg
- * @Date 2019-12-26 00:29
+ * @Description:springsecurity用户权限包装了
  */
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 public class UserPrincipal implements UserDetails {
+
 
     private String username;
     @JsonIgnore
@@ -42,31 +42,31 @@ public class UserPrincipal implements UserDetails {
 
     @Override
     public String getPassword() {
-        return null;
+        return password;
     }
 
     @Override
     public String getUsername() {
-        return null;
+        return username;
     }
 
     @Override
     public boolean isAccountNonExpired() {
-        return false;
+        return true;
     }
 
     @Override
     public boolean isAccountNonLocked() {
-        return false;
+        return true;
     }
 
     @Override
     public boolean isCredentialsNonExpired() {
-        return false;
+        return true;
     }
 
     @Override
     public boolean isEnabled() {
-        return false;
+        return true;
     }
 }
