@@ -20,9 +20,10 @@ import java.io.IOException;
 public class MyAuthenticationEntryPointHandler implements AuthenticationEntryPoint {
     @Override
     public void commence(HttpServletRequest request, HttpServletResponse response, AuthenticationException e) throws IOException, ServletException {
+        e.printStackTrace();
         StringBuffer msg = new StringBuffer("请求访问: ");
         msg.append(request.getRequestURI()).append(" 接口，因为认证失败，无法访问系统资源.");
-        log.info(msg.toString());
-        ResponseUtil.out(response, ResponseUtil.resultMap(401, "权限不足，无法访问该资源"));
+        log.error(msg.toString());
+        ResponseUtil.out(response, ResponseUtil.resultMap(401, e.getMessage()));
     }
 }

@@ -52,7 +52,7 @@ public class SysUserServiceImpl extends ServiceImpl<SysUserMapper, SysUser> impl
     public SysUser getUserDetailByUsername(String username) {
         SysUser user = getOne(new LambdaQueryWrapper<SysUser>().eq(SysUser::getUsername, username));
         if (user != null) {
-            Set<String> roleIds = userRoleService.list(new LambdaQueryWrapper<SysUserRole>().eq(SysUserRole::getUserId, user.getId()).eq(SysUserRole::getDeleteFlag, 0))
+            Set<Integer> roleIds = userRoleService.list(new LambdaQueryWrapper<SysUserRole>().eq(SysUserRole::getUserId, user.getId()).eq(SysUserRole::getDeleteFlag, false))
                     .stream().map(sysUserRole -> sysUserRole.getRoleId()).collect(Collectors.toSet());
             if (CollectionUtils.isNotEmpty(roleIds)) {
                 List<SysRole> roleList = roleService.list(new LambdaQueryWrapper<SysRole>().eq(SysRole::getDeleteFlag, 0).in(SysRole::getId, roleIds));

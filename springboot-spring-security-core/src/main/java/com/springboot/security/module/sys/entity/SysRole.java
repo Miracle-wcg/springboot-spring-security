@@ -10,5 +10,5 @@ import lombok.Data;
 @Data
 public class SysRole extends BaseEntity {
     private String roleName;
-    private Integer roleStatus;
+    private Boolean roleStatus;
 }

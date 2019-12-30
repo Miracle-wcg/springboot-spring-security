@@ -1,5 +1,6 @@
 package com.springboot.security.config.security.config;
 
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.access.AccessDecisionManager;
 import org.springframework.security.access.AccessDeniedException;
 import org.springframework.security.access.ConfigAttribute;
@@ -19,7 +20,7 @@ import java.util.Iterator;
  * 认证通过就返回，不通过抛异常就行了，spring security会自动跳到权限不足处理类（WebSecurityConfig 类中配置文件上配的）
  */
 //lombok日志注解，省去每个类里定义Looger，private final Logger logger = LoggerFactory.getLogger(LoggerTest.class);
-//@Slf4j
+@Slf4j
 @Component
 public class MyAccessDecisionManager implements AccessDecisionManager {
 
@@ -38,7 +39,7 @@ public class MyAccessDecisionManager implements AccessDecisionManager {
     public void decide(Authentication authentication, Object object, Collection<ConfigAttribute> configAttributes) throws AccessDeniedException, InsufficientAuthenticationException {
         // 无权限访问
         if (CollectionUtils.isEmpty(configAttributes)) {
-            System.out.println("无访问权限.");
+            log.error("无访问权限.");
             throw new AccessDeniedException("无访问权限.");
         }
         Iterator<ConfigAttribute> iterator = configAttributes.iterator();
@@ -55,7 +56,7 @@ public class MyAccessDecisionManager implements AccessDecisionManager {
             }
         }
         //该url具有访问权限，但是当前登录用户没有匹配到URL对应的权限，则抛出无权限错误
-        System.out.println("无访问权限.");
+        log.error("无访问权限.");
         throw new AccessDeniedException("无访问权限.");
     }
 

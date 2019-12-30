@@ -44,6 +44,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     /**
      * If you want to expose Spring Security’s AuthenticationManager as a bean, override the authenticationManagerBean method on your WebSecurityConfigurerAdapter and annotate it with @Bean.
+     *
      * @return
      * @throws Exception
      */
@@ -138,7 +139,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .and()
                 .formLogin()
                 //登录页面路径
-                .loginPage("/loginpage")
+                .loginPage("/signin")
                 //登录url
                 .loginProcessingUrl("/login")//此登录url 和Controller 无关系
                 //登录成功跳转路径

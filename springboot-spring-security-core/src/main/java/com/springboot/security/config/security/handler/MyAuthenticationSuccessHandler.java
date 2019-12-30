@@ -29,7 +29,6 @@ public class MyAuthenticationSuccessHandler extends SavedRequestAwareAuthenticat
         UserPrincipal securityUserDetails = (UserPrincipal) authentication.getPrincipal();
         String token = JwtTokenUtil.generateAccessToken(securityUserDetails);
         token = JwtTokenUtil.tokenPrefix + token;
-
         ResponseUtil.out(response, ResponseUtil.resultMap(200, "登录成功", token));
     }
 }

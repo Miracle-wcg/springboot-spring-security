@@ -15,6 +15,8 @@ public class SysUser extends BaseEntity {
     private String username;
     private String password;
     private String email;
+    @TableField(value = "is_enabled")
+    private Boolean enabled;
     @TableField(exist = false)
     private List<SysRole> roles;
 }

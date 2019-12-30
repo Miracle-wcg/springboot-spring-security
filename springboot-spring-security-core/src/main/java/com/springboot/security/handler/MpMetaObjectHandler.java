@@ -16,11 +16,13 @@ import java.util.Date;
 public class MpMetaObjectHandler implements MetaObjectHandler {
     @Override
     public void insertFill(MetaObject metaObject) {
-        this.setFieldValByName("deleteFlag", 0, metaObject);
-        this.setFieldValByName("createAt", new Date(), metaObject);
-        this.setFieldValByName("createBy", "SYS", metaObject);
-        this.setFieldValByName("updateAt", new Date(), metaObject);
-        this.setFieldValByName("updateBy", "SYS", metaObject);
+        Date currentTime = new Date();
+        String currentUser = "SYS";
+        this.setFieldValByName("deleteFlag", false, metaObject);
+        this.setFieldValByName("createAt", currentTime, metaObject);
+        this.setFieldValByName("createBy", currentUser, metaObject);
+        this.setFieldValByName("updateAt", currentTime, metaObject);
+        this.setFieldValByName("updateBy", currentUser, metaObject);
     }
 
     @Override

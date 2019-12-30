@@ -24,7 +24,7 @@ public class BaseEntity implements Serializable {
     @TableId(type = IdType.AUTO)
     private Integer id;
     @TableField(fill = FieldFill.INSERT)
-    private Integer deleteFlag;
+    private Boolean deleteFlag;
     @TableField(fill = FieldFill.INSERT)
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
     private Date createAt;

@@ -9,6 +9,6 @@ import lombok.Data;
  */
 @Data
 public class SysRolePerm extends BaseEntity {
-    private String roleId;
-    private String permId;
+    private Integer roleId;
+    private Integer permId;
 }

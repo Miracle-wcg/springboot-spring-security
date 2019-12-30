@@ -13,6 +13,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
+import java.util.List;
+
 /**
  * @Author: chengang.wu
  * @Date: 2019-12-19 16:25
@@ -45,8 +47,8 @@ public class SysUserServiceTest {
     @Test
     public void saveSysUserRole() {
         SysUserRole userRole = new SysUserRole();
-        userRole.setUserId("1");
-        userRole.setRoleId("1");
+        userRole.setUserId(1);
+        userRole.setRoleId(1);
         userRoleService.save(userRole);
     }
 
@@ -54,7 +56,17 @@ public class SysUserServiceTest {
     public void selectAllRoleByUserId() {
 //        List<String> list = userService.selectAllRoleByUserId(1);
 //        SysUser admin = userService.getOne(new LambdaQueryWrapper<SysUser>().eq(SysUser::getUsername, "admin"));
-        SysUser admin1 = userService.getUserDetailByUsername("admin");
+//        SysUser admin1 = userService.getUserDetailByUsername("admin");
+        List<SysUser> list = userService.list();
         System.out.println(111);
+    }
+
+    @Test
+    public void saveUser() {
+        SysUser user = new SysUser();
+        user.setUsername("bbb");
+        user.setPassword("123123");
+        user.setEnabled(true);
+        userService.save(user);
     }
 }

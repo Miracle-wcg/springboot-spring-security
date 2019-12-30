@@ -49,6 +49,10 @@ public class JWTAuthenticationFilter extends BasicAuthenticationFilter {
         }*/
         //获得accessToken
         String accessToken = request.getHeader(JwtTokenUtil.tokenHeader);
+        if (StringUtils.isEmpty(accessToken)) {
+            ResponseUtil.out(response, ResponseUtil.resultMap(401, "Token doesn't existed"));
+            return;
+        }
         if (null != accessToken && accessToken.startsWith(JwtTokenUtil.tokenPrefix)) {
             try {
                 UsernamePasswordAuthenticationToken authentication = getAuthentication(request, response);
