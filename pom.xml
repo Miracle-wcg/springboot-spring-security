@@ -6,6 +6,8 @@
     <modules>
         <module>springboot-spring-security-core</module>
         <module>springboot-spring-security-web</module>
+        <module>springboot-spring-security-qq</module>
+        <module>springboot-spring-security-wechat</module>
     </modules>
     <groupId>com.springboot.security</groupId>
     <artifactId>springboot-spring-security</artifactId>
