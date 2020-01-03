@@ -1,6 +1,8 @@
 package com.springboot.security.qq;
 
+import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.springboot.security.entity.SocialUser;
+import com.springboot.security.security.UserPrincipal;
 import com.springboot.security.service.SocialUserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -17,16 +19,23 @@ import org.springframework.stereotype.Service;
 @Service
 public class CustomSocialUserDetailsService implements UserDetailsService, SocialUserDetailsService {
     @Autowired
-    private SocialUserService socialUserService;
+    private SocialUserService userService;
 
     @Override
     public SocialUserDetails loadUserByUserId(String userId) throws UsernameNotFoundException {
-        SocialUser user = socialUserService.getById(userId);
-        return null;
+        SocialUser user = userService.getById(userId);
+        if (user == null) {
+            throw new UsernameNotFoundException("User not found with id : " + userId);
+        }
+        return UserPrincipal.create(user);
     }
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        return null;
+        SocialUser user = userService.getOne(new LambdaQueryWrapper<SocialUser>().eq(SocialUser::getDisplayName, username));
+        if (user == null) {
+            throw new UsernameNotFoundException("User not found with username : " + username);
+        }
+        return UserPrincipal.create(user);
     }
 }
