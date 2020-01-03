@@ -49,10 +49,10 @@ public class JWTAuthenticationFilter extends BasicAuthenticationFilter {
         }*/
         //获得accessToken
         String accessToken = request.getHeader(JwtTokenUtil.tokenHeader);
-        if (StringUtils.isEmpty(accessToken)) {
+        /*if (StringUtils.isEmpty(accessToken)) {
             ResponseUtil.out(response, ResponseUtil.resultMap(401, "Token doesn't existed"));
             return;
-        }
+        }*/
         if (null != accessToken && accessToken.startsWith(JwtTokenUtil.tokenPrefix)) {
             try {
                 UsernamePasswordAuthenticationToken authentication = getAuthentication(request, response);
@@ -101,10 +101,12 @@ public class JWTAuthenticationFilter extends BasicAuthenticationFilter {
                     return new UsernamePasswordAuthenticationToken(principal, userId, authorities);
                 }
             } catch (ExpiredJwtException e) {
+                e.printStackTrace();
                 System.out.println("toekn超过有效期，请重新登");
                 //throw new BaseException("401","toekn超过有效期，请重新登录");
                 ResponseUtil.out(response, ResponseUtil.resultMap(401, "token has expired"));
             } catch (Exception e) {
+                e.printStackTrace();
                 ResponseUtil.out(response, ResponseUtil.resultMap(401, "token invalid"));
             }
         }

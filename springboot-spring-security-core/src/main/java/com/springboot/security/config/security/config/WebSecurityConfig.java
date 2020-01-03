@@ -5,6 +5,7 @@ import com.springboot.security.config.security.util.JwtTokenUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.core.annotation.Order;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.BeanIds;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
@@ -26,6 +27,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 @EnableWebSecurity
 //开启方法级的权限注解,性设置后控制器层的方法前的@PreAuthorize("hasRole('admin')") 注解才能起效
 @EnableGlobalMethodSecurity(prePostEnabled = true)
+@Order(1)
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     @Autowired
     JwtTokenUtil jwtTokenUtil;
@@ -125,12 +127,16 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .and()
                 //对请求进行认证
                 //url认证配置顺序为：1.先配置放行不需要认证的 permitAll() 2.然后配置 需要特定权限的 hasRole() 3.最后配置 anyRequest().authenticated()
-                .authorizeRequests()
-                .antMatchers(JwtTokenUtil.antMatchers.split(",")).permitAll()
+                .authorizeRequests(authorizeRequests ->
+                        authorizeRequests.antMatchers(JwtTokenUtil.antMatchers.split(",")).permitAll()
+                                .anyRequest().authenticated()
+                )
+//                .antMatchers(JwtTokenUtil.antMatchers.split(",")).permitAll()
                 //其他请求都需要进行认证,认证通过够才能访问
-                // 待考证：如果使用重定向 httpServletRequest.getRequestDispatcher(url).forward(httpServletRequest,httpServletResponse); 重定向跳转的url不会被拦截（即在这里配置了重定向的url需要特定权限认证不起效），但是如果在Controller 方法上配置了方法级的权限则会进行拦截
-                .anyRequest().authenticated()
-                .and()
+                // 待考证：如果使用重定向 httpServletRequest.getRequestDispatcher(url).forward(httpServletRequest,httpServletResponse);
+                // 重定向跳转的url不会被拦截（即在这里配置了重定向的url需要特定权限认证不起效），但是如果在Controller 方法上配置了方法级的权限则会进行拦截
+//                .anyRequest().authenticated()
+//                .and()
                 .exceptionHandling()
                 //在访问一个受保护的资源，用户没有通过登录认证，则抛出登录认证异常，MyAuthenticationEntryPointHandler类中commence()就会调用
                 .authenticationEntryPoint(myAuthEntryPointHandler)
@@ -139,7 +145,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .and()
                 .formLogin()
                 //登录页面路径
-                .loginPage("/signin")
+                .loginPage("/sign-in")
                 //登录url
                 .loginProcessingUrl("/login")//此登录url 和Controller 无关系
                 //登录成功跳转路径

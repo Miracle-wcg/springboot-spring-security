@@ -18,10 +18,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 /**
  * @Author: chengang.wu
@@ -36,7 +33,7 @@ public class LoginController {
     @Autowired
     private AuthenticationManager authenticationManager;
 
-    @PostMapping("/signin")
+    @PostMapping("/sign-in")
     public ApiResponse login(@RequestBody @Validated LoginRequest request) {
         SysUser user = userService.getUserDetailByUsername(request.getUsername());
         if (user == null) {
@@ -54,10 +51,12 @@ public class LoginController {
         Authentication authenticate = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(request.getUsername(), request.getPassword()));
         SecurityContextHolder.getContext().setAuthentication(authenticate);
         String token = JwtTokenUtil.generateAccessToken((UserDetails) authenticate.getPrincipal());
+        token = JwtTokenUtil.tokenPrefix + " " + token;
         return ApiResponse.ok(token);
     }
 
     @GetMapping("/user-info")
+    @ResponseBody
     public ApiResponse getCurrentUser(@CurrentUser CurrentUser currentUser) {
         return ApiResponse.ok(currentUser);
     }

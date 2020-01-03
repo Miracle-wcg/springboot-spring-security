@@ -50,7 +50,7 @@ public class JwtTokenUtil {
         return Jwts.builder()
                 //主题 放入用户名
                 .setSubject(userDetails.getUsername())
-//                .setId(securityUserDetails.getId() + "")
+                .setId(securityUserDetails.getId() + "")
                 //自定义属性 放入用户拥有权限
                 .claim(authHeader, JSON.toJSONString(securityUserDetails.getAuthorities()))
                 //失效时间

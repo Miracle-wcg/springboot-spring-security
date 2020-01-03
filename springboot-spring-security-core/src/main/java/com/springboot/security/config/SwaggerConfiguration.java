@@ -3,7 +3,9 @@ package com.springboot.security.config;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import springfox.documentation.builders.ApiInfoBuilder;
+import springfox.documentation.builders.ParameterBuilder;
 import springfox.documentation.builders.RequestHandlerSelectors;
+import springfox.documentation.schema.ModelRef;
 import springfox.documentation.service.Parameter;
 import springfox.documentation.spi.DocumentationType;
 import springfox.documentation.spring.web.plugins.Docket;
@@ -29,7 +31,7 @@ public class SwaggerConfiguration {
 
     private List<Parameter> globalOperationParameters() {
         List<Parameter> parameters = new ArrayList<>();
-//         parameters.add(new ParameterBuilder().name("Authorization").description("Authorization").required(false).parameterType("header").modelRef(new ModelRef("string")).build());
+        parameters.add(new ParameterBuilder().name("Authorization").description("Authorization").required(false).parameterType("header").modelRef(new ModelRef("string")).build());
         return parameters;
     }
 

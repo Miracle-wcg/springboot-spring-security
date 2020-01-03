@@ -21,6 +21,7 @@ import java.util.stream.Collectors;
 @AllArgsConstructor
 public class UserPrincipal implements UserDetails {
 
+    private Integer id;
 
     private String username;
     @JsonIgnore
@@ -32,7 +33,7 @@ public class UserPrincipal implements UserDetails {
 
     public static UserPrincipal create(SysUser user) {
         List<SimpleGrantedAuthority> authorities = user.getRoles().stream().map(role -> new SimpleGrantedAuthority(role.getRoleName())).collect(Collectors.toList());
-        return new UserPrincipal(user.getUsername(), user.getEmail(), user.getPassword(), authorities);
+        return new UserPrincipal(user.getId(), user.getUsername(), user.getEmail(), user.getPassword(), authorities);
     }
 
     @Override
