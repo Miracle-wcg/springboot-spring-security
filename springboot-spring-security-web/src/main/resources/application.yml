@@ -81,7 +81,7 @@ mybatis:
   configuration:
     log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
 jwt:
-  tokenHeader: accessToken
+  tokenHeader: Authorization
   authHeader: authorities
   tokenPrefix: Bearer
   secret: security
