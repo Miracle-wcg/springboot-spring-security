@@ -1,9 +1,12 @@
 package com.springboot.security.entity;
 
 import com.baomidou.mybatisplus.annotation.IdType;
+import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import lombok.Data;
+
+import java.util.List;
 
 /**
  * @Author: chengang.wu
@@ -24,4 +27,6 @@ public class SocialUser {
     private String secret;
     private String refreshToken;
     private Integer expireTime;
+    @TableField(exist = false)
+    private List<SysRole> roles;
 }
