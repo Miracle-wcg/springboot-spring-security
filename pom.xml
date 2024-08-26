@@ -24,7 +24,7 @@
         <lombok.verison>1.18.10</lombok.verison>
         <mybatis.plus.verison>3.2.0</mybatis.plus.verison>
         <orika.verison>1.10.0</orika.verison>
-        <springfox.swagger.verison>2.9.2</springfox.swagger.verison>
+        <springfox.swagger.verison>2.10.0</springfox.swagger.verison>
         <swagger.verison>1.5.22</swagger.verison>
         <druid.verison>1.1.21</druid.verison>
         <commons-lang3.verison>3.8.1</commons-lang3.verison>
